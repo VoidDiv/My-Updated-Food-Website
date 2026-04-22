@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart - Saludo's Letchonhouse</title>
+    <link rel="icon" type="image/png" href="Pictures/SaludoLetchonhouse.jpg">
+    <link rel="stylesheet" href="Stylesheets/SaludoWebsite.css">
+
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: rgb(235, 224, 206);
+            background-image: url('Pictures/Yellow and Black Restaurant Food Menu.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: #333;
+            padding: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .left-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            border-radius: 50%;
+            border: 2px solid black;
+        }
+
+        .title {
+            background-color: rgb(100, 104, 83);
+            color: rgb(240, 229, 216);
+            font-size: 32px;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        hr {
+            border: none;
+            height: 4px;
+            background-color: black;
+            margin: 20px 0;
+        }
+
+        .auth-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-button,
+        .login-button,
+        .signup-button,
+        .home-button,
+        .clear-cart-btn,
+        .item-btn {
+            font-size: 16px;
+            padding: 8px 14px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .cart-button,
+        .login-button,
+        .signup-button,
+        .home-button,
+        .clear-cart-btn {
+            background-color: rgb(86, 62, 75);
+            color: white;
+        }
+
+        .cart-button:hover,
+        .login-button:hover,
+        .signup-button:hover,
+        .home-button:hover,
+        .clear-cart-btn:hover {
+            background-color: rgb(65, 45, 55);
+        }
+
+        .user-area {
+            display: none;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .welcome-message {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        .profile-container {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .profile-circle {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid black;
+        }
+
+        .profile-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 65px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+            width: 170px;
+            text-align: center;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .profile-dropdown p,
+        .profile-dropdown button {
+            padding: 12px;
+            margin: 0;
+            cursor: pointer;
+            font-weight: bold;
+            color: black;
+            background: white;
+            border: none;
+            width: 100%;
+        }
+
+        .profile-dropdown p:hover,
+        .profile-dropdown button:hover {
+            background-color: #f2f2f2;
+        }
+
+        .page-title {
+            font-size: 35px;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .cart-top-actions {
+            margin-bottom: 20px;
+        }
+
+        .cart-container {
+            max-width: 1000px;
+            margin-top: 20px;
+        }
+
+        .cart-card {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            background-color: rgba(255,255,255,0.94);
+            border: 1px solid #aaa;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            box-shadow: 1px 1px 8px rgba(0,0,0,0.2);
+        }
+
+        .cart-image {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid #777;
+        }
+
+        .cart-info {
+            flex: 1;
+        }
+
+        .cart-info p {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .qty-input {
+            width: 80px;
+            padding: 6px;
+            font-size: 16px;
+            margin-left: 8px;
+        }
+
+        .item-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .order-btn {
+            background-color: rgb(34, 139, 34);
+            color: white;
+        }
+
+        .order-btn:hover {
+            background-color: rgb(25, 100, 25);
+        }
+
+        .preorder-btn {
+            background-color: rgb(218, 165, 32);
+            color: white;
+        }
+
+        .preorder-btn:hover {
+            background-color: rgb(180, 135, 20);
+        }
+
+        .remove-btn {
+            background-color: rgb(178, 34, 34);
+            color: white;
+        }
+
+        .remove-btn:hover {
+            background-color: rgb(140, 25, 25);
+        }
+
+        .cart-summary {
+            background-color: rgba(255,255,255,0.94);
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 20px;
+            max-width: 400px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .empty-message {
+            font-size: 22px;
+            color: white;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<header class="logo-title">
+    <div class="left-header">
+        <img class="logo" src="Pictures/SaludoLetchonhouse.jpg" alt="Logo" height="150">
+        <h1 class="title">SALUDO'S LETCHONHOUSE (SLS)</h1>
+    </div>
+
+    <div class="auth-section">
+        <button class="home-button" onclick="window.location.href='SaludoStreetFoods.html'">Home</button>
+        <a href="Cart.html"><button class="cart-button" id="cartButton">Cart</button></a>
+        <a href="SLSLogin.html"><button class="login-button">Log in</button></a>
+        <a href="SLSSignup.html"><button class="signup-button">Sign Up</button></a>
+
+        <div class="user-area" id="userArea">
+            <p class="welcome-message" id="welcomeMessage"></p>
+
+            <div class="profile-container" id="profileContainer">
+                <img id="profileCircle" class="profile-circle" src="Pictures/default-profile.png" alt="Profile">
+
+                <div class="profile-dropdown" id="profileDropdown">
+                    <p id="viewProfile">View Profile</p>
+                    <p id="logoutBtn">Log Out</p>
+                    <button id="viewOrdersBtn">View Orders</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<hr>
+
+<h1 class="page-title">Your Cart</h1>
+
+<div class="cart-top-actions">
+    <button class="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
+</div>
+
+<div class="cart-container" id="cartContainer"></div>
+<div class="cart-summary" id="cartSummary" style="display:none;"></div>
+
+<script>
+window.addEventListener("DOMContentLoaded", function() {
+    const loggedInUser = localStorage.getItem("loggedInUser");
+
+    const loginButton = document.querySelector(".login-button");
+    const signupButton = document.querySelector(".signup-button");
+    const cartButton = document.getElementById("cartButton");
+
+    const userArea = document.getElementById("userArea");
+    const welcomeMessage = document.getElementById("welcomeMessage");
+
+    const profileContainer = document.getElementById("profileContainer");
+    const profileCircle = document.getElementById("profileCircle");
+    const profileDropdown = document.getElementById("profileDropdown");
+
+    const viewProfile = document.getElementById("viewProfile");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const viewOrdersBtn = document.getElementById("viewOrdersBtn");
+
+    function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+        let totalQty = 0;
+
+        cart.forEach(item => {
+            totalQty += Number(item.quantity || 1);
+        });
+
+        if (cartButton) {
+            cartButton.textContent = totalQty > 0 ? `Cart (${totalQty})` : "Cart";
+        }
+    }
+
+    if (!loggedInUser) {
+        alert("Please log in first!");
+        window.location.href = "SLSLogin.html";
+        return;
+    }
+
+    updateCartCount();
+
+    if (loginButton) loginButton.style.display = "none";
+    if (signupButton) signupButton.style.display = "none";
+    if (userArea) userArea.style.display = "flex";
+
+    fetch(`http://127.0.0.1:5000/get_profile/${loggedInUser}`)
+        .then(res => {
+            if (!res.ok) {
+                throw new Error("Profile not found");
+            }
+            return res.json();
+        })
+        .then(data => {
+            welcomeMessage.textContent = `Welcome, ${data.username || loggedInUser}!`;
+
+            if (data.profilePicture && data.profilePicture.trim() !== "") {
+                profileCircle.src = data.profilePicture;
+            } else {
+                profileCircle.src = "Pictures/default-profile.png";
+            }
+        })
+        .catch(error => {
+            console.error("Error loading profile:", error);
+            welcomeMessage.textContent = `Welcome, ${loggedInUser}!`;
+            profileCircle.src = "Pictures/default-profile.png";
+        });
+
+    profileCircle.addEventListener("click", function(event) {
+        event.stopPropagation();
+        profileDropdown.style.display =
+            profileDropdown.style.display === "block" ? "none" : "block";
+    });
+
+    viewProfile.addEventListener("click", function() {
+        window.location.href = "profile.html";
+    });
+
+    logoutBtn.addEventListener("click", function() {
+        localStorage.removeItem("loggedInUser");
+        localStorage.removeItem("latestUsername");
+        localStorage.removeItem("adminLoggedIn");
+        localStorage.removeItem("adminUsername");
+        localStorage.removeItem("selectedOrderItem");
+        localStorage.removeItem("selectedPreOrderItem");
+        window.location.href = "SLSLogin.html";
+    });
+
+    if (viewOrdersBtn) {
+        viewOrdersBtn.addEventListener("click", function() {
+            window.location.href = "viewOrders.html";
+        });
+    }
+
+    document.addEventListener("click", function(e) {
+        if (!profileContainer.contains(e.target)) {
+            profileDropdown.style.display = "none";
+        }
+    });
+
+    renderCart();
+});
+
+function renderCart() {
+    const cartContainer = document.getElementById("cartContainer");
+    const cartSummary = document.getElementById("cartSummary");
+    let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+    cartContainer.innerHTML = "";
+    let grandTotal = 0;
+
+    if (cart.length === 0) {
+        cartContainer.innerHTML = `<p class="empty-message">Your cart is empty.</p>`;
+        cartSummary.style.display = "none";
+        return;
+    }
+
+    cart.forEach((item, index) => {
+        const quantity = Number(item.quantity || 1);
+        const price = Number(item.price || 0);
+        const subtotal = quantity * price;
+        grandTotal += subtotal;
+
+        const card = document.createElement("div");
+        card.className = "cart-card";
+
+        card.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" class="cart-image">
+
+            <div class="cart-info">
+                <p><strong>Food Item:</strong> ${item.name}</p>
+                <p><strong>Category:</strong> ${item.category || "Food Item"}</p>
+                <p><strong>Price:</strong> ₱${price.toFixed(2)}</p>
+                <p>
+                    <strong>Quantity:</strong>
+                    <input type="number" min="1" value="${quantity}" class="qty-input"
+                        onchange="changeQuantity(${index}, this.value)">
+                </p>
+                <p><strong>Subtotal:</strong> ₱${subtotal.toFixed(2)}</p>
+
+                <div class="item-buttons">
+                    <button class="item-btn order-btn" onclick="orderNowFromCart(${index})">Order Now</button>
+                    <button class="item-btn preorder-btn" onclick="preOrderFromCart(${index})">Pre-Order</button>
+                    <button class="item-btn remove-btn" onclick="removeCartItem(${index})">Remove</button>
+                </div>
+            </div>
+        `;
+
+        cartContainer.appendChild(card);
+    });
+
+    cartSummary.style.display = "block";
+    cartSummary.innerHTML = `Grand Total: ₱${grandTotal.toFixed(2)}`;
+
+    const cartButton = document.getElementById("cartButton");
+    let totalQty = 0;
+    cart.forEach(item => {
+        totalQty += Number(item.quantity || 1);
+    });
+    if (cartButton) {
+        cartButton.textContent = totalQty > 0 ? `Cart (${totalQty})` : "Cart";
+    }
+}
+
+function changeQuantity(index, newQty) {
+    let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+    newQty = Number(newQty);
+
+    if (newQty < 1 || isNaN(newQty)) {
+        newQty = 1;
+    }
+
+    cart[index].quantity = newQty;
+    localStorage.setItem("cartItems", JSON.stringify(cart));
+    renderCart();
+}
+
+function removeCartItem(index) {
+    let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+    cart.splice(index, 1);
+    localStorage.setItem("cartItems", JSON.stringify(cart));
+    renderCart();
+}
+
+function clearCart() {
+    localStorage.removeItem("cartItems");
+    renderCart();
+}
+
+function orderNowFromCart(index) {
+    let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const selectedItem = cart[index];
+
+    if (!selectedItem) return;
+
+    localStorage.setItem("selectedOrderItem", JSON.stringify(selectedItem));
+    window.location.href = "order-now.html";
+}
+
+function preOrderFromCart(index) {
+    let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const selectedItem = cart[index];
+
+    if (!selectedItem) return;
+
+    localStorage.setItem("selectedPreOrderItem", JSON.stringify(selectedItem));
+    window.location.href = "PreOrder.html";
+}
+</script>
+
+</body>
+</html>

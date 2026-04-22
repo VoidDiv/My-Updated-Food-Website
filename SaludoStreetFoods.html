@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Saludo's Sisigan Paresan</title>
+    <link rel="icon" type="image/png" href="Pictures/SaludoLetchonhouse.jpg">
+    <link rel="stylesheet" href="Stylesheets/SaludoWebsite.css">
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: rgb(235, 224, 206);
+            background-image: url('Pictures/Yellow and Black Restaurant Food Menu.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: #333;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header class="logo-title">
+    <div class="left-header">
+        <img class="logo" src="Pictures/SaludoLetchonhouse.jpg" alt="SSP Logo" height="150">
+        <h1 class="title">SALUDO'S LETCHONHOUSE (SLS)</h1>
+    </div>
+
+    <div class="auth-section">
+        <a href="Cart.html"><button class="cart-button">Cart</button></a>
+        <a href="SLSLogin.html"><button class="login-button">Log in</button></a>
+        <a href="SLSSignup.html"><button class="signup-button">Sign Up</button></a>
+
+        <div class="user-area" id="userArea">
+            <p class="welcome-message" id="welcomeMessage"></p>
+
+            <div class="profile-container" id="profileContainer">
+                <img id="profileCircle" class="profile-circle" src="Pictures/default-profile.png" alt="Profile">
+
+                <div class="profile-dropdown" id="profileDropdown">
+                    <p id="viewProfile">View Profile</p>
+                    <p id="logoutBtn">Log Out</p>
+                    <button type="button" id="viewOrdersBtn" class="dropdown-btn">View Orders</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<hr>
+
+<p class="description">
+    <b>HELLO! WELCOME TO SALUDO'S LETCHONHOUSE!<br>
+    AUTHENTIC FILIPINO SISIG, BEEF PARES AND FILIFINO LETCHON MANOK!<br>
+    BUY NOW AND HAVE A TASTE!</b>
+</p>
+
+<h2 class="food-section-title">SISIG COMBO MEALS:</h2>
+<div class="food-list">
+    <div class="food-item"
+         data-name="Sizzling Pork Sisig With Rice"
+         data-price="75.00"
+         data-image="Pictures/Pork Sisig.png"
+         data-category="Sisig Combo Meals">
+        <img src="Pictures/Pork Sisig.png" alt="Pork Sisig">
+        <div class="food-details">
+            <div class="food-name">Sizzling Pork Sisig With Rice</div>
+            <div class="food-description">Experience the sizzling sensation of authentic Filipino pork sisig! Perfect appetizer or main course. Order now and enjoy a taste of the islands.</div>
+            <div class="food-note">Free delivery on orders over ₱150!</div>
+            <div class="food-price">₱75.00</div>
+            <div class="food-actions">
+                <a href="#" class="add-cart-btn">ADD TO CART</a>
+                <a href="#" class="buy-now-btn">BUY NOW</a>
+                <a href="#" class="preorder-btn">PRE-ORDER</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="food-item"
+         data-name="Sizzling Chicken Sisig With Rice"
+         data-price="65.00"
+         data-image="Pictures/Chicken Sisig.png"
+         data-category="Sisig Combo Meals">
+        <img src="Pictures/Chicken Sisig.png" alt="Chicken Sisig">
+        <div class="food-details">
+            <div class="food-name">Sizzling Chicken Sisig With Rice</div>
+            <div class="food-description">Our flavorful Chicken Sisig delivers all the sizzle and satisfying crunch, with a lighter, healthier twist! Enjoy guilt-free deliciousness.</div>
+            <div class="food-note">Free delivery on orders over ₱130!</div>
+            <div class="food-price">₱65.00</div>
+            <div class="food-actions">
+                <a href="#" class="add-cart-btn">ADD TO CART</a>
+                <a href="#" class="buy-now-btn">BUY NOW</a>
+                <a href="#" class="preorder-btn">PRE-ORDER</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2 class="food-section-title">BEEF PARES COMBO MEALS:</h2>
+<div class="food-list">
+    <div class="food-item"
+         data-name="Beef Pares With Plain/White Rice"
+         data-price="50.00"
+         data-image="Pictures/Pares Plain Rice.jpg"
+         data-category="Beef Pares Combo Meals">
+        <img src="Pictures/Pares Plain Rice.jpg" alt="Beef Pares Plain">
+        <div class="food-details">
+            <div class="food-name">Beef Pares With Plain/White Rice</div>
+            <div class="food-description">A comforting and flavorful dish served with tender beef simmered in a sweet and savory sauce, paired with steamed plain rice.</div>
+            <div class="food-price">₱50.00</div>
+            <div class="food-actions">
+                <a href="#" class="add-cart-btn">ADD TO CART</a>
+                <a href="#" class="buy-now-btn">BUY NOW</a>
+                <a href="#" class="preorder-btn">PRE-ORDER</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="food-item"
+         data-name="Beef Pares With Java/Yellow Rice"
+         data-price="50.00"
+         data-image="Pictures/Java Rice.jpg"
+         data-category="Beef Pares Combo Meals">
+        <img src="Pictures/Java Rice.jpg" alt="Beef Pares Java Rice">
+        <div class="food-details">
+            <div class="food-name">Beef Pares With Java/Yellow Rice</div>
+            <div class="food-description">Succulent beef in a rich sauce, served with fragrant java rice infused with garlic and spices.</div>
+            <div class="food-price">₱50.00</div>
+            <div class="food-actions">
+                <a href="#" class="add-cart-btn">ADD TO CART</a>
+                <a href="#" class="buy-now-btn">BUY NOW</a>
+                <a href="#" class="preorder-btn">PRE-ORDER</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2 class="food-section-title">LETCHON MANOK AND LIEMPO:</h2>
+<div class="food-list">
+    <div class="food-item"
+         data-name="Jumbo Letchon Manok With Plain/White Rice"
+         data-price="50.00"
+         data-image="Pictures/LetchonManok.jpg"
+         data-category="Letchon Manok and Liempo">
+        <img src="Pictures/LetchonManok.jpg" alt="Letchon Manok">
+        <div class="food-details">
+            <div class="food-name">Jumbo Letchon Manok With Plain/White Rice</div>
+            <div class="food-description">Juicy, perfectly roasted chicken infused with rich Filipino spices, delivering a smoky, savory flavor in every bite.</div>
+            <div class="food-price">₱50.00</div>
+            <div class="food-actions">
+                <a href="#" class="add-cart-btn">ADD TO CART</a>
+                <a href="#" class="buy-now-btn">BUY NOW</a>
+                <a href="#" class="preorder-btn">PRE-ORDER</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="food-item"
+         data-name="Pork Liempo With Java/Yellow Rice"
+         data-price="50.00"
+         data-image="Pictures/PorkLiempo.jpg"
+         data-category="Letchon Manok and Liempo">
+        <img src="Pictures/PorkLiempo.jpg" alt="Pork Liempo">
+        <div class="food-details">
+            <div class="food-name">Pork Liempo With Java/Yellow Rice</div>
+            <div class="food-description">Crispy on the outside, tender and flavorful on the inside, this grilled pork belly is marinated to perfection for an irresistible, mouthwatering experience.</div>
+            <div class="food-price">₱50.00</div>
+            <div class="food-actions">
+                <a href="#" class="add-cart-btn">ADD TO CART</a>
+                <a href="#" class="buy-now-btn">BUY NOW</a>
+                <a href="#" class="preorder-btn">PRE-ORDER</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<div class="contact">
+    <h2>Contact Us:</h2>
+    <p>
+        Phone: 09672257848 / 09562984512<br>
+        Email: saludosisiganparesan@gmail.com<br>
+        Visit our <a href="https://www.facebook.com/profile.php?id=61577663462655" target="_blank">Facebook Page</a>
+    </p>
+    <p>
+        Visit our <a href="https://www.youtube.com/@SaludosLetchonHouse" target="_blank">YouTube Channel</a>
+    </p>
+</div>
+
+<div class="about-us">
+    <a href="about-us.html"><h2>About Us</h2></a>
+</div>
+
+<!-- CHATBOT WRAPPER -->
+<div id="chatbot-wrapper">
+    <div id="chatbot-label">Chat with AI Bot</div>
+
+    <div id="chatbot-button">
+        <img src="Pictures/Chatbot ai.png" alt="Chatbot">
+    </div>
+</div>
+
+<div id="chatbox">
+    <div id="chat-header">Saludo's Assistant 🤖</div>
+
+    <div id="chat-messages">
+        <div><strong>Bot:</strong> Hello! Welcome to Saludo's Letchon House. How can I help you?</div>
+    </div>
+
+    <div id="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Ask something...">
+        <button id="send-btn" type="button">Send</button>
+    </div>
+</div>
+
+<script>
+window.addEventListener("DOMContentLoaded", function() {
+    const loggedInUser = localStorage.getItem("loggedInUser");
+
+    const loginButton = document.querySelector(".login-button");
+    const signupButton = document.querySelector(".signup-button");
+    const cartButton = document.querySelector(".cart-button");
+
+    const userArea = document.getElementById("userArea");
+    const welcomeMessage = document.getElementById("welcomeMessage");
+
+    const profileContainer = document.getElementById("profileContainer");
+    const profileCircle = document.getElementById("profileCircle");
+    const profileDropdown = document.getElementById("profileDropdown");
+
+    const viewProfile = document.getElementById("viewProfile");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const viewOrdersBtn = document.getElementById("viewOrdersBtn");
+
+    function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+        let totalQty = 0;
+
+        cart.forEach(item => {
+            totalQty += Number(item.quantity || 1);
+        });
+
+        if (cartButton) {
+            cartButton.textContent = totalQty > 0 ? `Cart (${totalQty})` : "Cart";
+        }
+    }
+
+    updateCartCount();
+
+    if (loggedInUser) {
+        if (loginButton) loginButton.style.display = "none";
+        if (signupButton) signupButton.style.display = "none";
+        if (userArea) userArea.style.display = "flex";
+
+        fetch(`http://127.0.0.1:5000/get_profile/${loggedInUser}`)
+            .then(res => {
+                if (!res.ok) throw new Error("Profile not found");
+                return res.json();
+            })
+            .then(data => {
+                welcomeMessage.textContent = `Welcome, ${data.username || loggedInUser}!`;
+
+                if (data.profilePicture && data.profilePicture.trim() !== "") {
+                    profileCircle.src = data.profilePicture;
+                } else {
+                    profileCircle.src = "Pictures/default-profile.png";
+                }
+            })
+            .catch(error => {
+                console.error("Error loading profile:", error);
+                welcomeMessage.textContent = `Welcome, ${loggedInUser}!`;
+                profileCircle.src = "Pictures/default-profile.png";
+            });
+
+        if (profileCircle) {
+            profileCircle.addEventListener("click", function(event) {
+                event.stopPropagation();
+                profileDropdown.style.display =
+                    profileDropdown.style.display === "block" ? "none" : "block";
+            });
+        }
+
+        if (viewProfile) {
+            viewProfile.addEventListener("click", function() {
+                window.location.href = "profile.html";
+            });
+        }
+
+        if (logoutBtn) {
+            logoutBtn.addEventListener("click", function() {
+                localStorage.removeItem("loggedInUser");
+                localStorage.removeItem("latestUsername");
+                localStorage.removeItem("adminLoggedIn");
+                localStorage.removeItem("adminUsername");
+                localStorage.removeItem("selectedOrderItem");
+                localStorage.removeItem("selectedPreOrderItem");
+                window.location.href = "SLSLogin.html";
+            });
+        }
+
+        if (viewOrdersBtn) {
+            viewOrdersBtn.addEventListener("click", function(event) {
+                event.stopPropagation();
+                window.location.href = "viewOrders.html";
+            });
+        }
+
+        document.addEventListener("click", function(e) {
+            if (profileContainer && !profileContainer.contains(e.target)) {
+                profileDropdown.style.display = "none";
+            }
+        });
+    } else {
+        if (userArea) userArea.style.display = "none";
+    }
+
+    const foodItems = document.querySelectorAll(".food-item");
+
+    foodItems.forEach(item => {
+        const addCartBtn = item.querySelector(".add-cart-btn");
+        const buyNowBtn = item.querySelector(".buy-now-btn");
+        const preorderBtn = item.querySelector(".preorder-btn");
+
+        const foodData = {
+            name: item.dataset.name,
+            price: parseFloat(item.dataset.price),
+            image: item.dataset.image,
+            category: item.dataset.category,
+            quantity: 1
+        };
+
+        if (addCartBtn) {
+            addCartBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+
+                if (!loggedInUser) {
+                    alert("Please log in first before adding to cart.");
+                    window.location.href = "SLSLogin.html";
+                    return;
+                }
+
+                let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+                const existingItem = cart.find(cartItem => cartItem.name === foodData.name);
+
+                if (existingItem) {
+                    existingItem.quantity = Number(existingItem.quantity || 1) + 1;
+                } else {
+                    cart.push({
+                        name: foodData.name,
+                        price: foodData.price,
+                        image: foodData.image,
+                        category: foodData.category,
+                        quantity: 1
+                    });
+                }
+
+                localStorage.setItem("cartItems", JSON.stringify(cart));
+                updateCartCount();
+                alert(`${foodData.name} added to cart!`);
+            });
+        }
+
+        if (buyNowBtn) {
+            buyNowBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+
+                if (!loggedInUser) {
+                    alert("Please log in first before ordering.");
+                    window.location.href = "SLSLogin.html";
+                    return;
+                }
+
+                localStorage.setItem("selectedOrderItem", JSON.stringify(foodData));
+                window.location.href = "order-now.html";
+            });
+        }
+
+        if (preorderBtn) {
+            preorderBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+
+                if (!loggedInUser) {
+                    alert("Please log in first before pre-ordering.");
+                    window.location.href = "SLSLogin.html";
+                    return;
+                }
+
+                localStorage.setItem("selectedPreOrderItem", JSON.stringify(foodData));
+                window.location.href = "PreOrder.html";
+            });
+        }
+    });
+
+    // CHATBOT
+    const chatbotButton = document.getElementById("chatbot-button");
+    const chatbox = document.getElementById("chatbox");
+    const sendBtn = document.getElementById("send-btn");
+    const chatInput = document.getElementById("chat-input");
+    const chatMessages = document.getElementById("chat-messages");
+
+    chatbotButton.addEventListener("click", function () {
+        chatbox.style.display = chatbox.style.display === "flex" ? "none" : "flex";
+    });
+
+    sendBtn.addEventListener("click", sendMessage);
+
+    chatInput.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+            sendMessage();
+        }
+    });
+
+    function sendMessage() {
+        const message = chatInput.value.trim();
+
+        if (message === "") return;
+
+        addMessage("You", message);
+
+        const reply = getBotReply(message.toLowerCase());
+
+        setTimeout(() => {
+            addMessage("Bot", reply);
+        }, 500);
+
+        chatInput.value = "";
+    }
+
+    function addMessage(sender, text) {
+        const msg = document.createElement("div");
+        msg.innerHTML = `<strong>${sender}:</strong> ${text}`;
+        chatMessages.appendChild(msg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function getBotReply(msg) {
+        if (msg.includes("hello") || msg.includes("hi")) {
+            return "Hello! Welcome to Saludo's Letchon House!";
+        }
+        if (msg.includes("menu")) {
+            return "We offer Sisig, Beef Pares, Letchon Manok, and Pork Liempo.";
+        }
+        if (msg.includes("sisig")) {
+            return "We have Sizzling Pork Sisig With Rice and Sizzling Chicken Sisig With Rice.";
+        }
+        if (msg.includes("pares")) {
+            return "We offer Beef Pares with Plain Rice and Beef Pares with Java Rice.";
+        }
+        if (msg.includes("liempo")) {
+            return "Our Pork Liempo With Java/Yellow Rice is available on the homepage menu.";
+        }
+        if (msg.includes("price") || msg.includes("how much")) {
+            return "Our food prices usually range from ₱50 to ₱75.";
+        }
+        if (msg.includes("order now") || msg.includes("buy now") || msg.includes("order")) {
+            return "Click BUY NOW if you want to order one item immediately.";
+        }
+        if (msg.includes("cart") || msg.includes("add to cart")) {
+            return "Click ADD TO CART to save food items first, then go to Cart.html to review them.";
+        }
+        if (msg.includes("pre-order") || msg.includes("preorder")) {
+            return "Click PRE-ORDER if you want to order food for a future date and time.";
+        }
+        if (msg.includes("login")) {
+            return "Click the Log in button at the top right of the homepage.";
+        }
+        if (msg.includes("signup") || msg.includes("sign up")) {
+            return "Click the Sign Up button to create your account first.";
+        }
+        if (msg.includes("profile")) {
+            return "After logging in, click your profile circle to view your profile.";
+        }
+        if (msg.includes("orders") || msg.includes("view orders")) {
+            return "After logging in, click your profile circle and choose View Orders.";
+        }
+        if (msg.includes("contact")) {
+            return "You can contact us at 09672257848 or 09562984512.";
+        }
+        if (msg.includes("facebook")) {
+            return "You can visit our Facebook page from the Contact Us section on the homepage.";
+        }
+        if (msg.includes("youtube")) {
+            return "You can visit our YouTube channel from the Contact Us section on the homepage.";
+        }
+        if (msg.includes("delivery")) {
+            return "You can choose Delivery when placing your order or pre-order.";
+        }
+        if (msg.includes("pickup")) {
+            return "You can also choose Pickup when placing your order.";
+        }
+
+        return "Sorry, I did not understand that. Try asking about menu, prices, order, cart, pre-order, login, or contact.";
+    }
+});
+</script>
+</body>
+</html>

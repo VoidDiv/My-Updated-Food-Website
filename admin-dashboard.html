@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard | Saludo's Letchonhouse</title>
+    <link rel="icon" type="image/png" href="Pictures/SaludoLetchonhouse.jpg">
+
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: rgb(247,221,180);
+            background-image: url('Pictures/Yellow and Black Restaurant Food Menu.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 20px;
+            color: rgb(39,38,37);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            border-radius: 50%;
+            border: 2px solid black;
+        }
+
+        .header h1 {
+            color: rgb(240, 229, 216);
+            background-color: rgb(86,62,75);
+            font-size: 32px;
+            margin: 0;
+            padding: 8px 14px;
+            border-radius: 8px;
+        }
+
+        .logout-btn,
+        .action-btn {
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            background-color: rgb(86,62,75);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .logout-btn:hover,
+        .action-btn:hover {
+            background-color: rgb(65,45,55);
+        }
+
+        .complete-btn {
+            background-color: rgb(22, 122, 65);
+        }
+
+        .complete-btn:hover {
+            background-color: rgb(16, 92, 48);
+        }
+
+        .cancel-btn {
+            background-color: rgb(178, 34, 34);
+        }
+
+        .cancel-btn:hover {
+            background-color: rgb(135, 25, 25);
+        }
+
+        .dashboard-section {
+            width: 95%;
+            margin: 20px auto;
+            background-color: rgba(255,255,255,0.93);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background-color: rgb(86,62,75);
+            color: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            min-width: 220px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        h2 {
+            margin: 25px 0 12px;
+            color: rgb(86,62,75);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 12px;
+            color: rgb(39,38,37);
+            background: white;
+        }
+
+        th, td {
+            border: 1px solid rgb(39,38,37);
+            padding: 10px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        th {
+            background-color: rgb(86,62,75);
+            color: white;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .pending { background-color: #d97706; }
+        .completed { background-color: #15803d; }
+        .cancelled { background-color: #b91c1c; }
+
+        .action-group {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .empty-row {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .error-box {
+            background: #fff3cd;
+            color: #7a5a00;
+            border: 1px solid #e0c36d;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .logo {
+                height: 90px;
+            }
+
+            .stat-card {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="header-left">
+            <img class="logo" src="Pictures/SaludoLetchonhouse.jpg" alt="Logo" height="100">
+            <h1>Saludo's Letchonhouse - Admin</h1>
+        </div>
+
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <div class="dashboard-section">
+        <div id="errorBox" class="error-box"></div>
+
+        <div class="stats">
+            <div class="stat-card">Total Users<br><span id="totalUsers">0</span></div>
+            <div class="stat-card">Total Orders<br><span id="totalOrders">0</span></div>
+            <div class="stat-card">Total Pre-Orders<br><span id="totalPreorders">0</span></div>
+        </div>
+
+        <h2>Regular Orders</h2>
+        <div class="table-wrapper">
+            <table id="cartTable">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Full Name</th>
+                        <th>Contact</th>
+                        <th>Food / Order Info</th>
+                        <th>Qty</th>
+                        <th>Total</th>
+                        <th>Order Type</th>
+                        <th>Address / Destination</th>
+                        <th>Payment</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <h2>Pre-Orders</h2>
+        <div class="table-wrapper">
+            <table id="preorderTable">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Full Name</th>
+                        <th>Contact</th>
+                        <th>Food Item</th>
+                        <th>Qty</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Order Type</th>
+                        <th>Address</th>
+                        <th>Payment</th>
+                        <th>Instructions</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+<script>
+    if (localStorage.getItem("adminLoggedIn") !== "true") {
+        alert("Please log in as admin.");
+        window.location.href = "SLSLogin.html";
+    }
+
+    function logout() {
+        localStorage.removeItem("adminLoggedIn");
+        localStorage.removeItem("adminUsername");
+        window.location.href = "SLSLogin.html";
+    }
+
+    function showError(message) {
+        const box = document.getElementById("errorBox");
+        box.style.display = "block";
+        box.textContent = message;
+    }
+
+    function hideError() {
+        const box = document.getElementById("errorBox");
+        box.style.display = "none";
+        box.textContent = "";
+    }
+
+    function getStatusBadge(status) {
+        const safeStatus = (status || "Pending").trim();
+        const lower = safeStatus.toLowerCase();
+
+        let className = "pending";
+        if (lower === "completed") className = "completed";
+        else if (lower === "cancelled") className = "cancelled";
+
+        return `<span class="status-badge ${className}">${safeStatus}</span>`;
+    }
+
+    async function safeJson(response) {
+        const text = await response.text();
+        try {
+            return JSON.parse(text);
+        } catch {
+            throw new Error("Invalid JSON response from server.");
+        }
+    }
+
+    async function loadStats() {
+        try {
+            const res = await fetch("http://127.0.0.1:5000/dashboard_stats");
+            const data = await safeJson(res);
+
+            document.getElementById("totalUsers").textContent = data.total_users || 0;
+            document.getElementById("totalOrders").textContent = data.total_orders || 0;
+            document.getElementById("totalPreorders").textContent = data.total_preorders || 0;
+        } catch (err) {
+            console.error("Stats error:", err);
+            showError("Failed to load dashboard stats. Make sure Flask is running.");
+        }
+    }
+
+    async function loadCartOrders() {
+        try {
+            const res = await fetch("http://127.0.0.1:5000/get_cart");
+            const orders = await safeJson(res);
+
+            const tbody = document.querySelector("#cartTable tbody");
+            tbody.innerHTML = "";
+
+            if (!Array.isArray(orders) || orders.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="11" class="empty-row">No regular orders found.</td></tr>`;
+                return;
+            }
+
+            orders.forEach(order => {
+                const foodOrOrder = order.foodItem || order.orderDetails || "No item";
+                const qty = order.quantity || 1;
+                const total = order.total ? `₱${Number(order.total).toFixed(2)}` : "—";
+                const orderType = order.orderType || "—";
+                const address = order.address || order.destination || "—";
+                const payment = order.payment || "—";
+
+                const statusPayload = order.foodItem
+                    ? `updateCartStatus(${JSON.stringify(order.username || "")}, ${JSON.stringify(order.foodItem || "")}, ${JSON.stringify(order.orderType || "")}, `
+                    : `updateLegacyCartStatus(${JSON.stringify(order.username || "")}, ${JSON.stringify(order.pickup || "")}, ${JSON.stringify(order.destination || "")}, `;
+
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${order.username || ""}</td>
+                    <td>${order.fullname || ""}</td>
+                    <td>${order.contact || ""}</td>
+                    <td>${foodOrOrder}</td>
+                    <td>${qty}</td>
+                    <td>${total}</td>
+                    <td>${orderType}</td>
+                    <td>${address}</td>
+                    <td>${payment}</td>
+                    <td>${getStatusBadge(order.status)}</td>
+                    <td>
+                        <div class="action-group">
+                            <button class="action-btn complete-btn"
+                                onclick='${statusPayload}"Completed")'>
+                                Complete
+                            </button>
+                            <button class="action-btn cancel-btn"
+                                onclick='${statusPayload}"Cancelled")'>
+                                Cancel
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        } catch (err) {
+            console.error("Cart orders error:", err);
+            showError("Failed to load regular orders. Check Flask server and database connection.");
+        }
+    }
+
+    async function loadPreOrders() {
+        try {
+            const res = await fetch("http://127.0.0.1:5000/get_preorders");
+            const orders = await safeJson(res);
+
+            const tbody = document.querySelector("#preorderTable tbody");
+            tbody.innerHTML = "";
+
+            if (!Array.isArray(orders) || orders.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="13" class="empty-row">No pre-orders found.</td></tr>`;
+                return;
+            }
+
+            orders.forEach(order => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${order.username || ""}</td>
+                    <td>${order.fullname || ""}</td>
+                    <td>${order.contact || ""}</td>
+                    <td>${order.foodItem || ""}</td>
+                    <td>${order.quantity || 1}</td>
+                    <td>${order.date || ""}</td>
+                    <td>${order.time || ""}</td>
+                    <td>${order.orderType || ""}</td>
+                    <td>${order.address || ""}</td>
+                    <td>${order.payment || "—"}</td>
+                    <td>${order.instructions || ""}</td>
+                    <td>${getStatusBadge(order.status)}</td>
+                    <td>
+                        <div class="action-group">
+                            <button class="action-btn complete-btn"
+                                onclick='updatePreorderStatus(${JSON.stringify(order.username || "")}, ${JSON.stringify(order.foodItem || "")}, ${JSON.stringify(order.date || "")}, "Completed")'>
+                                Complete
+                            </button>
+                            <button class="action-btn cancel-btn"
+                                onclick='updatePreorderStatus(${JSON.stringify(order.username || "")}, ${JSON.stringify(order.foodItem || "")}, ${JSON.stringify(order.date || "")}, "Cancelled")'>
+                                Cancel
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        } catch (err) {
+            console.error("Preorders error:", err);
+            showError("Failed to load pre-orders. Check Flask server and database connection.");
+        }
+    }
+
+    async function updateCartStatus(username, foodItem, orderType, status) {
+        const res = await fetch("http://127.0.0.1:5000/update_cart_status", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ username, foodItem, orderType, status })
+        });
+        const data = await safeJson(res);
+        alert(data.message);
+        loadCartOrders();
+        loadStats();
+    }
+
+    async function updateLegacyCartStatus(username, pickup, destination, status) {
+        const res = await fetch("http://127.0.0.1:5000/update_legacy_cart_status", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ username, pickup, destination, status })
+        });
+        const data = await safeJson(res);
+        alert(data.message);
+        loadCartOrders();
+        loadStats();
+    }
+
+    async function updatePreorderStatus(username, foodItem, date, status) {
+        const res = await fetch("http://127.0.0.1:5000/update_preorder_status", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ username, foodItem, date, status })
+        });
+        const data = await safeJson(res);
+        alert(data.message);
+        loadPreOrders();
+        loadStats();
+    }
+
+    hideError();
+    loadStats();
+    loadCartOrders();
+    loadPreOrders();
+</script>
+</body>
+</html>

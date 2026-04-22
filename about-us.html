@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Learn About Us</title>
+    <link rel="website icon" type="png" href="Pictures/SaludoLetchonhouse.jpg">
+    <style>
+        body {
+            background-color: rgb(247, 221, 180);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        span {
+            color: whitesmoke;
+        }
+
+        /* ===== HEADER ===== */
+        .header-container {
+            width: 100%;
+            background-color: transparent;
+        }
+
+        .top-header {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 10px 20px 0 20px;
+        }
+
+        .marquee-container {
+            background-color: rgb(86, 62, 75);
+            font-size: 70px;
+            color: whitesmoke;
+            padding: 0px;
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .logo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+            border: 3px solid black;
+        }
+
+        /* ===== NAVIGATION LINKS ===== */
+        .nav-links {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: rgb(86, 62, 75);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 8px;
+            border: 2px solid black;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            background-color: rgb(110, 82, 97);
+            transform: scale(1.03);
+        }
+
+        hr {
+            width: 100%;
+            height: 5px;
+            background-color: rgb(3, 3, 3);
+            border: none;
+            margin: 20px 0;
+        }
+
+        .image-text-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+            gap: 20px;
+        }
+
+        .image-text-container img {
+            width: 700px;
+            height: auto;
+            margin-right: 20px;
+            border-style: solid;
+        }
+
+        .image-text-container h1 {
+            flex-grow: 1;
+            text-align: justify;
+        }
+
+        .about-us {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: rgb(39, 38, 37); 
+            margin-top: 5px;
+        }
+
+        .eatery-description {
+            font-size: 20px;
+            font-style: italic;
+            margin-bottom: 10px;
+            color: rgb(53, 52, 52);
+            line-height: 50px;
+        }
+
+        .content-container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .about-us-container {
+            border: 2px solid black;
+            padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 5px;
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .aboutus-year {
+            font-weight: bold;
+            font-size: 20px;
+            text-decoration: underline;
+        }
+
+        .image-text-container video {
+            width: 700px;
+            height: 500px;
+            margin-right: 20px;
+            border-style: solid;
+        }
+
+        .video-text {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1200px) {
+            .image-text-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .image-text-container img,
+            .image-text-container video {
+                width: 100%;
+                max-width: 700px;
+                height: auto;
+                margin-right: 0;
+            }
+
+            .eatery-description {
+                line-height: 35px;
+                text-align: justify;
+            }
+
+            .marquee-container {
+                font-size: 40px;
+            }
+
+            .logo {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <div class="header-container">
+        <div class="top-header">
+            <img class="logo" src="Pictures/SaludoLetchonhouse.jpg" alt="SSP Eatery Logo">
+            <div class="marquee-container">
+                <marquee scrollamount="20"><span>Welcome to SLS, Sulit Sarap Pasado </span></marquee>
+            </div>
+        </div>
+
+        <!-- MOVED LINKS HERE -->
+        <div class="nav-links">
+            <a href="SaludoStreetFoods.html">Home</a>
+            <a href="Chart-Of-Accounts.html">Chart of Accounts</a>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <hr>
+
+        <div class="about-us-container">
+            <div class="image-text-container">
+                <div>
+                    <h2 class="about-us">ABOUT US</h2>
+                    <p class="aboutus-year">YEAR 2023-2024</p>
+                    <img src="Pictures/SSP PIC.jpg" alt="Sample Image">
+                </div>
+                <h1 class="eatery-description">
+                    Our small business started four years ago and has since grown. It was formerly known as Saludo Streetfoods and Pares ng Bayan. Four years later, it was renamed Saludo Sisigan Paresan, or SSP Eatery. The business's growth is due to the resilience and dedication of my parents, and the blessings of the Lord.
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-container" style="margin-top: 30px;">
+        <div class="about-us-container">
+            <div class="image-text-container">
+                <div>
+                    <p class="aboutus-year">YEAR 2025-PRESENT</p>
+                    <video controls src="Videos/saludoletchon.mp4"></video>
+                    <p class="video-text">Saludo’s Letchonhouse Promotional Video</p>
+                    <a href="https://www.youtube.com/shorts/VtepbTYKmZA" target="_blank">
+                        Watch on YouTube
+                    </a>
+                </div>
+                <h1 class="eatery-description">
+                    After another year of continuous growth and strong support from our customers, the business transformed into a lechon house and was proudly renamed Saludo’s Letchonhouse, marking a new chapter while maintaining its passion, dedication, and commitment to quality.
+                </h1>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chart of Accounts - Saludo's Letchonhouse</title>
+    <link rel="website icon" type="png" href="Pictures/SSP.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: rgb(235, 224, 206);
+            background-image: url('Pictures/Yellow and Black Restaurant Food Menu.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: #333;
+            padding: 20px;
+        }
+
+        /* General */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header */
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            border-radius: 50%;
+            border: 2px solid black;
+        }
+
+        .title {
+            background-color: rgb(100, 104, 83);
+            color: rgb(240, 229, 216);
+            font-size: 32px;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        hr {
+            border: none;
+            height: 4px;
+            background-color: black;
+            margin: 20px 0;
+        }
+
+        /* Right Header Section */
+        .auth-section {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            gap: 10px;
+        }
+
+        .login-button {
+            font-size: large;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .signup-button {
+            font-size: large;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .user-area {
+            display: none;
+            align-items: center;
+            gap: 15px;
+            margin-left: auto;
+        }
+
+        .welcome-message {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        .profile-container {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .profile-circle {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid black;
+        }
+
+        .profile-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 65px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+            width: 160px;
+            text-align: center;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .profile-dropdown p {
+            padding: 12px;
+            margin: 0;
+            cursor: pointer;
+            font-weight: bold;
+            color: black;
+        }
+
+        .profile-dropdown p:hover {
+            background-color: #f2f2f2;
+        }
+
+        /* Page Heading */
+        .page-title {
+            text-align: center;
+            color: white;
+            font-size: 38px;
+            margin-bottom: 25px;
+        }
+
+        /* Controls */
+        .controls {
+            width: 80%;
+            margin: 0 auto 20px auto;
+            background-color: rgba(255,255,255,0.92);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 1px 1px 8px rgba(0,0,0,0.2);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .controls label {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        select {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        /* Table */
+        #tableContainer {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 85%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: rgba(255,255,255,0.95);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 12px;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: rgb(247, 221, 180);
+            color: rgb(23, 22, 22);
+        }
+
+        tr:hover {
+            background-color: rgba(255, 248, 220, 0.7);
+        }
+
+        .highlight {
+            background-color: #FFFFE0;
+        }
+
+        /* Chart */
+        #chartContainer {
+            width: 85%;
+            max-width: 1000px;
+            height: 450px;
+            margin: 30px auto;
+            background-color: rgba(255,255,255,0.95);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+            display: none;
+        }
+
+        /* Back Button */
+        .back-home {
+            display: inline-block;
+            margin-top: 25px;
+            margin-left: 120px;
+            padding: 10px 18px;
+            background-color: black;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .back-home:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="logo-title">
+        <img class="logo" src="Pictures/SaludoLetchonhouse.jpg" alt="SSP Logo" height="150">
+        <h1 class="title">SALUDO'S LETCHONHOUSE (SLS)</h1>
+
+        <div class="auth-section">
+            <a href="SLSLogin.html"><button class="login-button">Log in</button></a>
+            <a href="SLSSignup.html"><button class="signup-button">Sign Up</button></a>
+
+            <!-- Welcome + Profile Area -->
+            <div class="user-area" id="userArea">
+                <p class="welcome-message" id="welcomeMessage"></p>
+
+                <div class="profile-container" id="profileContainer">
+                    <img id="profileCircle" class="profile-circle" src="Pictures/default-profile.png" alt="Profile">
+
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <p id="viewProfile">View Profile</p>
+                        <p id="logoutBtn">Log Out</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <hr>
+
+    <h1 class="page-title">Chart of Accounts</h1>
+
+    <div class="controls">
+        <label for="dateSelect">Select Date:</label>
+        <select id="dateSelect">
+            <option value="2025-June">June 2025</option>
+            <option value="2025-July">July 2025</option>
+            <option value="2025-August">August 2025</option>
+        </select>
+
+        <label for="chartType">Select Chart Type:</label>
+        <select id="chartType">
+            <option value="table">Table</option>
+            <option value="bar">Bar Chart</option>
+            <option value="line">Line Chart</option>
+        </select>
+    </div>
+
+    <div id="tableContainer">
+        <table>
+            <tr class="assets-color"><th>Account Type</th><th>Account Name</th><th>Financial Statement</th><th>Amount</th></tr>
+            <tr><td>Assets</td><td>Cash on Hand</td><td>Balance Sheet</td><td class="amount"></td></tr>
+            <tr><td>Assets</td><td>Cash in Bank</td><td>Balance Sheet</td><td class="amount"></td></tr>
+            <tr><td>Assets</td><td>Sales Receivable</td><td>Balance Sheet</td><td class="amount"></td></tr>
+            <tr><td>Assets</td><td>Food Inventory</td><td>Balance Sheet</td><td class="amount"></td></tr>
+            <tr><td>Assets</td><td>Prepaid Rent</td><td>Balance Sheet</td><td class="amount"></td></tr>
+            <tr><td>Assets</td><td>Kitchen Equipment</td><td>Balance Sheet</td><td class="amount"></td></tr>
+            <tr><td>Assets</td><td>Equip Depreciation</td><td>Balance Sheet</td><td class="amount"></td></tr>
+            <tr><td>Assets</td><td>Dining Furniture</td><td>Balance Sheet</td><td class="amount"></td></tr>
+            <tr><td>Assets</td><td>Furniture Depreciation</td><td>Balance Sheet</td><td class="amount"></td></tr>
+
+            <tr><td>Liabilities</td><td>Supplier Payables</td><td>Balance Sheet</td><td class="amount"></td></tr>
+            <tr><td>Liabilities</td><td>Loans Payable</td><td>Balance Sheet</td><td class="amount"></td></tr>
+            <tr><td>Liabilities</td><td>Tax Payable</td><td>Balance Sheet</td><td class="amount"></td></tr>
+            <tr><td>Liabilities</td><td>Salaries Payable</td><td>Balance Sheet</td><td class="amount"></td></tr>
+
+            <tr><td>Equity</td><td>Owner's Capital</td><td>Balance Sheet</td><td class="amount"></td></tr>
+            <tr><td>Equity</td><td>Owner's Withdraw</td><td>Balance Sheet</td><td class="amount"></td></tr>
+            <tr><td>Equity</td><td>Retained Earnings</td><td>Balance Sheet</td><td class="amount"></td></tr>
+
+            <tr class="highlight"><td>Revenues</td><td class="highlight">Food Sales</td><td class="highlight">Income Statement</td><td class="amount highlight"></td></tr>
+            <tr class="highlight"><td>Revenues</td><td class="highlight">Drinks Sales</td><td class="highlight">Income Statement</td><td class="amount highlight"></td></tr>
+            <tr class="highlight"><td>Revenues</td><td class="highlight">Other Income</td><td class="highlight">Income Statement</td><td class="amount highlight"></td></tr>
+
+            <tr><td>Expenses</td><td>Cost of Ingredients</td><td>Income Statement</td><td class="amount"></td></tr>
+            <tr><td>Expenses</td><td>Staff Wages</td><td>Income Statement</td><td class="amount"></td></tr>
+            <tr><td>Expenses</td><td>Rent Expense</td><td>Income Statement</td><td class="amount"></td></tr>
+            <tr><td>Expenses</td><td>Water & Electric</td><td>Income Statement</td><td class="amount"></td></tr>
+            <tr><td>Expenses</td><td>Repairs & Cleaning</td><td>Income Statement</td><td class="amount"></td></tr>
+            <tr><td>Expenses</td><td>Supplies (condiments)</td><td>Income Statement</td><td class="amount"></td></tr>
+            <tr><td>Expenses</td><td>Marketing/Promo</td><td>Income Statement</td><td class="amount"></td></tr>
+            <tr><td>Expenses</td><td>Delivery Expense</td><td>Income Statement</td><td class="amount"></td></tr>
+            <tr><td>Expenses</td><td>Depreciation</td><td>Income Statement</td><td class="amount"></td></tr>
+            <tr><td>Expenses</td><td>Miscellaneous</td><td>Income Statement</td><td class="amount"></td></tr>
+        </table>
+    </div>
+
+    <div id="chartContainer">
+        <canvas id="salesChart"></canvas>
+    </div>
+
+    <a href="SaludoStreetFoods.html" class="back-home">← Back to Home</a>
+
+    <script>
+        // ---------------- HEADER / PROFILE ----------------
+        window.addEventListener("DOMContentLoaded", function() {
+            const loggedInUser = localStorage.getItem("loggedInUser");
+
+            const loginButton = document.querySelector(".login-button");
+            const signupButton = document.querySelector(".signup-button");
+
+            const userArea = document.getElementById("userArea");
+            const welcomeMessage = document.getElementById("welcomeMessage");
+
+            const profileContainer = document.getElementById("profileContainer");
+            const profileCircle = document.getElementById("profileCircle");
+            const profileDropdown = document.getElementById("profileDropdown");
+
+            const viewProfile = document.getElementById("viewProfile");
+            const logoutBtn = document.getElementById("logoutBtn");
+
+            if (loggedInUser) {
+                if (loginButton) loginButton.style.display = "none";
+                if (signupButton) signupButton.style.display = "none";
+
+                userArea.style.display = "flex";
+
+                fetch(`http://127.0.0.1:5000/get_profile/${loggedInUser}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        welcomeMessage.textContent = `Welcome, ${data.fullname || loggedInUser}!`;
+
+                        if (data.profilePicture && data.profilePicture !== "") {
+                            profileCircle.src = data.profilePicture;
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error loading profile:", error);
+                        welcomeMessage.textContent = `Welcome, ${loggedInUser}!`;
+                    });
+
+                profileCircle.addEventListener("click", function(event) {
+                    event.stopPropagation();
+                    profileDropdown.style.display =
+                        profileDropdown.style.display === "block" ? "none" : "block";
+                });
+
+                viewProfile.addEventListener("click", function() {
+                    window.location.href = "profile.html";
+                });
+
+                logoutBtn.addEventListener("click", function() {
+                    localStorage.removeItem("loggedInUser");
+                    window.location.href = "SLSLogin.html";
+                });
+
+                document.addEventListener("click", function(e) {
+                    if (!profileContainer.contains(e.target)) {
+                        profileDropdown.style.display = "none";
+                    }
+                });
+            } else {
+                userArea.style.display = "none";
+            }
+        });
+
+        // ---------------- CHART OF ACCOUNTS ----------------
+        const dateSelect = document.getElementById('dateSelect');
+        const chartTypeSelect = document.getElementById('chartType');
+        const amountCells = document.querySelectorAll('.amount');
+        const tableContainer = document.getElementById('tableContainer');
+        const chartContainer = document.getElementById('chartContainer');
+        let salesChart;
+        const ctx = document.getElementById('salesChart').getContext('2d');
+
+        const data = {
+            "2025-June": {
+                "Cash on Hand": 5000, "Cash in Bank": 5500, "Sales Receivable": 2200, "Food Inventory": 3300, "Prepaid Rent": 1600,
+                "Kitchen Equipment": 10000, "Equip Depreciation": 1100, "Dining Furniture": 5200, "Furniture Depreciation": 550,
+                "Supplier Payables": 4200, "Loans Payable": 10000, "Tax Payable": 1100, "Salaries Payable": 1300,
+                "Owner's Capital": 21000, "Owner's Withdraw": 1200, "Retained Earnings": 5500,
+                "Food Sales": 22000, "Drinks Sales": 5500, "Other Income": 1200,
+                "Cost of Ingredients": 8800, "Staff Wages": 6600, "Rent Expense": 2200, "Water & Electric": 1100,
+                "Repairs & Cleaning": 600, "Supplies (condiments)": 250, "Marketing/Promo": 1100, "Delivery Expense": 400,
+                "Depreciation": 1600, "Miscellaneous": 150
+            },
+            "2025-July": {
+                "Cash on Hand": 5300, "Cash in Bank": 6000, "Sales Receivable": 2500, "Food Inventory": 3500, "Prepaid Rent": 1000,
+                "Kitchen Equipment": 10000, "Equip Depreciation": 1200, "Dining Furniture": 5200, "Furniture Depreciation": 600,
+                "Supplier Payables": 4500, "Loans Payable": 10000, "Tax Payable": 1300, "Salaries Payable": 2500,
+                "Owner's Capital": 22000, "Owner's Withdraw": 1500, "Retained Earnings": 6000,
+                "Food Sales": 25000, "Drinks Sales": 6000, "Other Income": 1500,
+                "Cost of Ingredients": 9000, "Staff Wages": 7000, "Rent Expense": 2500, "Water & Electric": 1200,
+                "Repairs & Cleaning": 700, "Supplies (condiments)": 300, "Marketing/Promo": 1300, "Delivery Expense": 500,
+                "Depreciation": 1700, "Miscellaneous": 200
+            },
+            "2025-August": {
+                "Cash on Hand": 4800, "Cash in Bank": 6500, "Sales Receivable": 2800, "Food Inventory": 3800, "Prepaid Rent": 1400,
+                "Kitchen Equipment": 10000, "Equip Depreciation": 1300, "Dining Furniture": 5200, "Furniture Depreciation": 650,
+                "Supplier Payables": 4800, "Loans Payable": 10000, "Tax Payable": 1400, "Salaries Payable": 2800,
+                "Owner's Capital": 23000, "Owner's Withdraw": 1800, "Retained Earnings": 6500,
+                "Food Sales": 28000, "Drinks Sales": 6500, "Other Income": 1800,
+                "Cost of Ingredients": 9200, "Staff Wages": 7200, "Rent Expense": 2800, "Water & Electric": 1300,
+                "Repairs & Cleaning": 800, "Supplies (condiments)": 350, "Marketing/Promo": 1400, "Delivery Expense": 600,
+                "Depreciation": 1800, "Miscellaneous": 250
+            }
+        };
+
+        const salesData = {
+            "2025-June": 22000,
+            "2025-July": 25000,
+            "2025-August": 28000
+        };
+
+        function updateAmounts(date) {
+            amountCells.forEach(cell => cell.textContent = '');
+            const accountData = data[date];
+
+            amountCells.forEach(cell => {
+                const accountName = cell.parentElement.querySelector('td:nth-child(2)').textContent;
+                const amount = accountData[accountName];
+                cell.textContent = amount >= 0 ? '₱' + amount.toLocaleString() : '(₱' + Math.abs(amount).toLocaleString() + ')';
+            });
+        }
+
+        function createChart(chartType, monthData) {
+            if (salesChart) {
+                salesChart.destroy();
+            }
+
+            const labels = Object.keys(monthData);
+            const values = Object.values(monthData);
+
+            const chartConfig = {
+                type: chartType,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Monthly Sales',
+                        data: values,
+                        backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1,
+                        fill: false,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            };
+
+            salesChart = new Chart(ctx, chartConfig);
+        }
+
+        chartTypeSelect.addEventListener('change', () => {
+            if (chartTypeSelect.value === 'table') {
+                tableContainer.style.display = 'block';
+                chartContainer.style.display = 'none';
+            } else {
+                tableContainer.style.display = 'none';
+                chartContainer.style.display = 'block';
+                createChart(chartTypeSelect.value, salesData);
+            }
+        });
+
+        dateSelect.addEventListener('change', () => {
+            updateAmounts(dateSelect.value);
+        });
+
+        // Initial display
+        updateAmounts(dateSelect.value);
+        tableContainer.style.display = 'block';
+        chartContainer.style.display = 'none';
+    </script>
+</body>
+</html>

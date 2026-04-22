@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SLSSignup</title>
+    <link rel="icon" type="image/png" href="Pictures/SaludoLetchonhouse.jpg">
+    <link rel="stylesheet" href="Stylesheets/SLSSignup.css">
+</head>
+
+<style>
+    body {
+        background-color: rgb(222, 222, 222);
+        background-image: url('Pictures/Yellow and Black Restaurant Food Menu.png');
+    }
+</style>
+
+<body>
+    <header>
+        <div>
+            <img class="logo" src="Pictures/SSP.png" height="200px" width="200px">
+            <h1 class="title">
+                Saludo's Sisigan Paresan (SSP)
+            </h1>
+        </div>
+    </header>
+
+    <hr id="line"> 
+
+    <div class="content-container">
+        <p class="Title">CREATE AN ACCOUNT</p>
+
+        <img id="profilePreview" class="profile-preview" src="Pictures/default-profile.png">
+
+        <label for="profilePicture" class="upload-label">Upload Profile Picture</label>
+        <input type="file" id="profilePicture" class="profile-upload" accept="image/*">
+
+        <input type="text" class="fullname" placeholder="Full Name">
+        <input type="text" class="email" placeholder="Email">
+        <input type="text" class="phone" placeholder="Phone Number">
+        <input type="text" class="address" placeholder="Address">
+
+        <input type="text" class="username" placeholder="Username">
+
+        <!-- ✅ ONLY CHANGE: PASSWORD WITH EYE -->
+        <div class="password-container">
+            <input type="password" class="password" placeholder="Password" id="signupPassword">
+            <span class="toggle-password" id="toggleSignupPassword">👁</span>
+        </div>
+
+        <button class="signup-button">Sign Up</button>
+
+        <p class="question">Already have an account?</p>
+        <a class="login-link" href="SLSLogin.html">
+            <p class="log-in">LOG IN HERE</p>
+        </a>
+    </div>
+
+    <a class="home-link" href="SaludoStreetFoods.html">
+        <p class="Home">BACK TO HOME</p>
+    </a>
+
+<script>
+let profileImageBase64 = "";
+
+// IMAGE PREVIEW
+document.getElementById("profilePicture").addEventListener("change", function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            profileImageBase64 = e.target.result;
+            document.getElementById("profilePreview").src = profileImageBase64;
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+// ✅ PASSWORD TOGGLE (ADDED ONLY)
+const toggleSignupPassword = document.getElementById("toggleSignupPassword");
+const signupPassword = document.getElementById("signupPassword");
+
+toggleSignupPassword.addEventListener("click", function () {
+    if (signupPassword.type === "password") {
+        signupPassword.type = "text";
+        toggleSignupPassword.textContent = "🙈";
+    } else {
+        signupPassword.type = "password";
+        toggleSignupPassword.textContent = "👁";
+    }
+});
+
+// SIGNUP FUNCTION (UNCHANGED)
+document.querySelector(".signup-button").addEventListener("click", function () {
+    const fullname = document.querySelector(".fullname").value.trim();
+    const email = document.querySelector(".email").value.trim();
+    const phone = document.querySelector(".phone").value.trim();
+    const address = document.querySelector(".address").value.trim();
+    const username = document.querySelector(".username").value.trim();
+    const password = document.querySelector("#signupPassword").value.trim();
+
+    if (!fullname || !email || !phone || !address || !username || !password) {
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    fetch("http://127.0.0.1:5000/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            fullname,
+            email,
+            phone,
+            address,
+            username,
+            password,
+            profilePicture: profileImageBase64
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.message === "Signup successful!") {
+            alert("Account created successfully!");
+            localStorage.setItem("loggedInUser", username);
+            window.location.href = "SaludoStreetFoods.html";
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Something went wrong.");
+    });
+
+    const toggleSignupPassword = document.getElementById("toggleSignupPassword");
+const signupPassword = document.getElementById("signupPassword");
+
+toggleSignupPassword.addEventListener("click", function () {
+    if (signupPassword.type === "password") {
+        signupPassword.type = "text";
+        toggleSignupPassword.textContent = "🙈";
+    } else {
+        signupPassword.type = "password";
+        toggleSignupPassword.textContent = "👁";
+    }
+});
+});
+
+</script>
+
+</body>
+</html>

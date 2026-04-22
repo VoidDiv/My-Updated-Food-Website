@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Orders | Saludo's Letchonhouse</title>
+    <link rel="stylesheet" href="Stylesheets/SaludoWebsite.css">
+
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: rgb(235,224,206);
+            background-image: url('Pictures/Yellow and Black Restaurant Food Menu.png');
+            background-size: cover;
+            padding: 20px;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo-title .left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            border-radius: 50%;
+            border: 2px solid black;
+        }
+
+        .title {
+            font-size: 28px;
+            color: black;
+            background-color: rgb(100, 104, 83);
+            color: rgb(240, 229, 216);
+            padding: 6px 12px;
+            border-radius: 6px;
+            margin: 0;
+        }
+
+        .home-btn {
+            padding: 10px 20px;
+            background-color: rgb(86,62,75);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .home-btn:hover {
+            background-color: rgb(65,45,55);
+        }
+
+        hr {
+            border: none;
+            height: 4px;
+            background-color: black;
+            margin: 20px 0;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 20px 0;
+            color: white;
+            font-size: 34px;
+        }
+
+        h3 {
+            margin-top: 30px;
+            color: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background: rgba(255,255,255,0.95);
+        }
+
+        th, td {
+            border: 1px solid #555;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: rgb(86,62,75);
+            color: white;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .pending {
+            background-color: #d97706;
+        }
+
+        .completed {
+            background-color: #15803d;
+        }
+
+        .cancelled {
+            background-color: #b91c1c;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                font-size: 14px;
+            }
+
+            .title {
+                font-size: 22px;
+            }
+
+            .logo {
+                height: 90px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="logo-title">
+    <div class="left">
+        <img class="logo" src="Pictures/SaludoLetchonhouse.jpg" height="120" alt="Logo">
+        <h1 class="title">SALUDO'S LETCHONHOUSE (SLS)</h1>
+    </div>
+
+    <button class="home-btn" onclick="window.location.href='SaludoStreetFoods.html'">
+        🏠 Home
+    </button>
+</header>
+
+<hr>
+
+<h2>My Orders</h2>
+
+<h3>Regular Orders</h3>
+<table id="cartOrdersTable">
+    <thead>
+        <tr>
+            <th>Fullname</th>
+            <th>Contact</th>
+            <th>Food Item</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Order Type</th>
+            <th>Address</th>
+            <th>Payment</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<h3>Pre-Orders</h3>
+<table id="preOrdersTable">
+    <thead>
+        <tr>
+            <th>Food Item</th>
+            <th>Quantity</th>
+            <th>Date / Time</th>
+            <th>Order Type</th>
+            <th>Address</th>
+            <th>Payment</th>
+            <th>Instructions</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<div id="emptyMessage" class="empty-message" style="display:none;">No orders found.</div>
+
+<script>
+const username = localStorage.getItem("loggedInUser");
+
+if (!username) {
+    alert("You must log in first!");
+    window.location.href = "SLSLogin.html";
+}
+
+function getStatusBadge(status) {
+    const safeStatus = (status || "Pending").trim();
+    const lower = safeStatus.toLowerCase();
+
+    let className = "pending";
+
+    if (lower === "completed") {
+        className = "completed";
+    } else if (lower === "cancelled") {
+        className = "cancelled";
+    }
+
+    return `<span class="status-badge ${className}">${safeStatus}</span>`;
+}
+
+async function loadOrders() {
+    try {
+        const res = await fetch(`http://127.0.0.1:5000/get_user_orders/${username}`);
+        const data = await res.json();
+
+        const cartBody = document.querySelector("#cartOrdersTable tbody");
+        const preBody = document.querySelector("#preOrdersTable tbody");
+        const emptyMessage = document.getElementById("emptyMessage");
+
+        cartBody.innerHTML = "";
+        preBody.innerHTML = "";
+
+        let hasOrders = false;
+
+        if (data.cart_orders && data.cart_orders.length > 0) {
+            hasOrders = true;
+
+            data.cart_orders.forEach(order => {
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+                    <td>${order.fullname || ""}</td>
+                    <td>${order.contact || ""}</td>
+                    <td>${order.foodItem || "Order"}</td>
+                    <td>${order.quantity || 1}</td>
+                    <td>₱${Number(order.total || 0).toFixed(2)}</td>
+                    <td>${order.orderType || ""}</td>
+                    <td>${order.address || ""}</td>
+                    <td>${order.payment || ""}</td>
+                    <td>${getStatusBadge(order.status)}</td>
+                `;
+
+                cartBody.appendChild(row);
+            });
+        } else {
+            cartBody.innerHTML = `
+                <tr>
+                    <td colspan="9">No regular orders found.</td>
+                </tr>
+            `;
+        }
+
+        if (data.pre_orders && data.pre_orders.length > 0) {
+            hasOrders = true;
+
+            data.pre_orders.forEach(order => {
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+                    <td>${order.foodItem || ""}</td>
+                    <td>${order.quantity || 1}</td>
+                    <td>${order.date || ""} / ${order.time || ""}</td>
+                    <td>${order.orderType || ""}</td>
+                    <td>${order.address || ""}</td>
+                    <td>${order.payment || ""}</td>
+                    <td>${order.instructions || ""}</td>
+                    <td>${getStatusBadge(order.status)}</td>
+                `;
+
+                preBody.appendChild(row);
+            });
+        } else {
+            preBody.innerHTML = `
+                <tr>
+                    <td colspan="8">No pre-orders found.</td>
+                </tr>
+            `;
+        }
+
+        emptyMessage.style.display = hasOrders ? "none" : "block";
+
+    } catch (error) {
+        console.error(error);
+        alert("Failed to load orders.");
+    }
+}
+
+loadOrders();
+</script>
+
+</body>
+</html>

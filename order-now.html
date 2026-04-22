@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Now | Saludo's Letchonhouse</title>
+    <link rel="stylesheet" href="Stylesheets/order.css">
+
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: rgb(235, 224, 206);
+            background-image: url('Pictures/Yellow and Black Restaurant Food Menu.png');
+            background-size: cover;
+            padding: 20px;
+        }
+
+        h1 {
+            color: white;
+            background-color: rgb(116, 95, 95);
+            padding: 10px;
+        }
+
+        .order-container {
+            background-color: rgba(255, 255, 255, 0.92);
+            max-width: 650px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input, select, textarea, button {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .button-row button {
+            cursor: pointer;
+        }
+
+        #foodImage {
+            display: block;
+            margin: 10px auto 20px auto;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="logo-title">
+    <img class="logo" src="Pictures/SaludoLetchonhouse.jpg" height="150" alt="Logo">
+    <h1>SALUDO'S LETCHONHOUSE (SLS)</h1>
+</header>
+
+<hr>
+
+<div class="order-container">
+    <h2>ORDER NOW</h2>
+
+    <img id="foodImage" width="200" alt="Food Image">
+
+    <div class="form-group">
+        <label>Food Item</label>
+        <input type="text" id="foodItem" readonly>
+    </div>
+
+    <div class="form-group">
+        <label>Price</label>
+        <input type="text" id="price" readonly>
+    </div>
+
+    <div class="form-group">
+        <label>Quantity</label>
+        <input type="number" id="quantity" min="1" value="1">
+    </div>
+
+    <div class="form-group">
+        <label>Total</label>
+        <input type="text" id="total" readonly>
+    </div>
+
+    <hr>
+
+    <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="fullname">
+    </div>
+
+    <div class="form-group">
+        <label>Contact Number</label>
+        <input type="text" id="contact">
+    </div>
+
+    <div class="form-group">
+        <label>Order Type</label>
+        <select id="orderType">
+            <option value="">-- Select --</option>
+            <option value="Pickup">Pickup</option>
+            <option value="Delivery">Delivery</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Address / Pickup Note</label>
+        <input type="text" id="address">
+    </div>
+
+    <div class="form-group">
+        <label>Payment Method</label>
+        <select id="payment">
+            <option value="">-- Select Payment --</option>
+            <option value="Cash on Delivery">Cash on Delivery</option>
+            <option value="GCash">GCash</option>
+            <option value="Maya">Maya</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Instructions</label>
+        <textarea id="instructions"></textarea>
+    </div>
+
+    <div class="button-row">
+        <button type="button" onclick="submitOrder()">Place Order</button>
+        <button type="button" onclick="window.location.href='SaludoStreetFoods.html'">Back</button>
+    </div>
+</div>
+
+<script>
+let selectedItem = null;
+
+window.addEventListener("DOMContentLoaded", function () {
+    const savedItem = localStorage.getItem("selectedOrderItem");
+
+    if (!savedItem) {
+        alert("No item selected!");
+        window.location.href = "SaludoStreetFoods.html";
+        return;
+    }
+
+    try {
+        selectedItem = JSON.parse(savedItem);
+    } catch (error) {
+        alert("Invalid order item data.");
+        window.location.href = "SaludoStreetFoods.html";
+        return;
+    }
+
+    document.getElementById("foodItem").value = selectedItem.name || "";
+    document.getElementById("price").value = selectedItem.price || 0;
+    document.getElementById("foodImage").src = selectedItem.image || "";
+
+    updateTotal();
+    document.getElementById("quantity").addEventListener("input", updateTotal);
+});
+
+function updateTotal() {
+    const qty = parseInt(document.getElementById("quantity").value) || 1;
+    const price = parseFloat(selectedItem.price) || 0;
+    const total = qty * price;
+    document.getElementById("total").value = total.toFixed(2);
+}
+
+async function submitOrder() {
+    const username = localStorage.getItem("loggedInUser");
+
+    if (!username) {
+        alert("Login first!");
+        window.location.href = "SLSLogin.html";
+        return;
+    }
+
+    const orderData = {
+        username: username,
+        fullname: document.getElementById("fullname").value.trim(),
+        contact: document.getElementById("contact").value.trim(),
+        foodItem: document.getElementById("foodItem").value.trim(),
+        price: parseFloat(document.getElementById("price").value) || 0,
+        quantity: parseInt(document.getElementById("quantity").value) || 1,
+        total: parseFloat(document.getElementById("total").value) || 0,
+        orderType: document.getElementById("orderType").value,
+        address: document.getElementById("address").value.trim(),
+        payment: document.getElementById("payment").value,
+        instructions: document.getElementById("instructions").value.trim(),
+        status: "Pending"
+    };
+
+    if (!orderData.fullname || !orderData.contact || !orderData.orderType || !orderData.address || !orderData.payment) {
+        alert("Please fill all required fields!");
+        return;
+    }
+
+    try {
+        const response = await fetch("http://127.0.0.1:5000/order-now", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(orderData)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || "Server error");
+        }
+
+        alert(data.message || "Order submitted successfully!");
+        window.location.href = "viewOrders.html";
+    } catch (error) {
+        console.error("Order submit error:", error);
+        alert("Failed to submit order: " + error.message);
+    }
+}
+</script>
+
+</body>
+</html>
