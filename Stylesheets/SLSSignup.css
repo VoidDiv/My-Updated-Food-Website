@@ -1,0 +1,226 @@
+div {
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: 100%;
+  justify-content: left; 
+  align-items: center; 
+  background-color: var(--secondary-color);
+  flex-grow: 1;
+  margin-left: 60px;
+}
+
+.title{
+    font-size: 35px;
+    color: white;
+    margin-left: 15px;
+}
+
+.username{
+    font-size: 15px;
+    font-family: 'Times New Roman';
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 100px;
+    margin-left: 15px;
+    background-color: rgb(239, 239, 239);
+    border-color: rgb(237, 235, 235);
+    border-style: hidden;
+    display: block;
+}
+
+.password{
+    font-size: 15px;
+    font-family: 'Times New Roman';
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 100px;
+    margin-left: 15px;
+    background-color: rgb(239, 239, 239);
+    border-color: rgb(237, 235, 235);
+    border-style: hidden;
+    display: block;
+}
+
+.fullname{
+    font-size: 15px;
+    font-family: 'Times New Roman';
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 100px;
+    margin-left: 15px;
+    background-color: rgb(239, 239, 239);
+    border-color: rgb(237, 235, 235);
+    border-style: hidden;
+    display: block;
+}
+
+.email{
+    font-size: 15px;
+    font-family: 'Times New Roman';
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 100px;
+    margin-left: 15px;
+    background-color: rgb(239, 239, 239);
+    border-color: rgb(237, 235, 235);
+    border-style: hidden;
+    display: block;
+}
+
+.phone{
+    font-size: 15px;
+    font-family: 'Times New Roman';
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 100px;
+    margin-left: 15px;
+    background-color: rgb(239, 239, 239);
+    border-color: rgb(237, 235, 235);
+    border-style: hidden;
+    display: block;
+}
+
+.address{
+    font-size: 15px;
+    font-family: 'Times New Roman';
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-right: 100px;
+    margin-left: 15px;
+    background-color: rgb(239, 239, 239);
+    border-color: rgb(237, 235, 235);
+    border-style: hidden;
+    display: block;
+}
+
+.signup-button{
+    font-size: 15px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    padding-right: 10px;
+    padding-left: 10px;
+    font-weight: bold;
+    border-radius: 2px;
+    border-style: hidden;
+    cursor: pointer;
+    margin-left: 20px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.signup-button:hover:active{
+    background-color: rgb(209, 209, 209);
+}
+
+.logo{
+    display: block;
+    border-radius: 360px;
+    border-style: solid;
+    border-color: black;
+    margin-bottom: 15px;
+}
+
+.line{
+    height: 2px;
+    border: none;
+    background-color: rgb(255, 255, 255);
+}
+
+.title{
+    background-color: rgb(100, 104, 83);
+    color: rgb(240, 229, 216);
+    font-size: 40px;
+    display: inline;
+    margin-left: 15px;
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.Home{
+    color: red;
+    font-size: 30px;
+    text-decoration: none;
+    margin-right: auto; 
+}
+
+.home-link{
+    text-decoration: none;
+}
+
+p{
+    color: white;
+}
+
+.log-in{
+    font-size: 20px;
+    color: yellowgreen;
+}
+
+.content-container{
+    border-style: solid;
+    align-items: flex-start;
+    gap: 10px;
+    width: 350px;
+    flex-direction: column;
+}
+
+.question{
+    display: block;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.login-link{
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+.profile-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+    object-fit: cover;
+    display: block;
+    margin: 10px auto 15px auto;
+    border: 3px solid white;
+    background-color: #f0f0f0;
+}
+
+.upload-label {
+    display: block;
+    text-align: center;
+    margin-bottom: 15px;
+    margin-left: 80px;
+    font-weight: bold;
+    cursor: pointer;
+    color: rgb(86, 13, 254);
+    text-decoration: underline;
+}
+
+.profile-upload {
+    display: none;
+}
+
+/* SEE PASSWORD FEATURE */
+.password-container {
+    position: relative;
+    display: block;
+}
+
+.password-container {
+    position: relative;
+    display: block;
+    margin-left: 1px;  
+    width: fit-content; 
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: black;
+}

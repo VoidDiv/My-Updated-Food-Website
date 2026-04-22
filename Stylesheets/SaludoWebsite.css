@@ -1,0 +1,417 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.logo-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.left-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+.title {
+    background-color: rgb(100, 104, 83);
+    color: rgb(240, 229, 216);
+    font-size: 32px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: 0;
+}
+
+hr {
+    border: none;
+    height: 4px;
+    background-color: black;
+    margin: 20px 0;
+}
+
+.description {
+    font-size: 24px;
+    color: #f7f7f7;
+    margin-bottom: 30px;
+    line-height: 1.4;
+}
+
+.food-section-title {
+    background-color: rgb(103, 100, 95);
+    color: whitesmoke;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 20px;
+    margin: 10px 850px 15px 0;
+}
+
+.food-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-left: 20px;
+    max-width: 800px;
+}
+
+.food-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background-color: rgba(255,255,255,0.9);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+}
+
+.food-item img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.food-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.food-name {
+    font-size: 24px;
+    font-weight: bold;
+    background-color: rgb(76, 76, 76);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.food-description {
+    font-size: 16px;
+    background-color: rgb(86, 85, 84);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.food-note {
+    font-size: 16px;
+    background-color: rgb(170, 150, 111);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.food-price {
+    font-size: 20px;
+    background-color: rgb(24, 23, 23);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    width: fit-content;
+}
+
+.food-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.food-actions a,
+.food-actions button {
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    font-size: 16px;
+    color: #2f1f1f;
+    background-color: #f5f5f5;
+}
+
+.food-actions a:hover,
+.food-actions button:hover {
+    background-color: #e41313;
+    color: white;
+}
+
+.add-cart-btn,
+.buy-now-btn,
+.preorder-btn {
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: white;
+    display: inline-block;
+}
+
+.add-cart-btn {
+    background-color: #d35400;
+}
+
+.buy-now-btn {
+    background-color: #27ae60;
+}
+
+.preorder-btn {
+    background-color: #8e44ad;
+}
+
+.add-cart-btn:hover,
+.buy-now-btn:hover,
+.preorder-btn:hover {
+    opacity: 0.85;
+}
+
+.contact {
+    margin-top: 40px;
+    max-width: 800px;
+    font-size: 16px;
+    color: white;
+}
+
+.contact a {
+    color: blueviolet;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.about-us {
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+.auth-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    flex-wrap: wrap;
+}
+
+.login-button,
+.signup-button,
+.cart-button {
+    font-size: large;
+    padding: 8px 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.cart-button {
+    background-color: #f39c12;
+    color: white;
+}
+
+.login-button {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.signup-button {
+    background-color: #16a085;
+    color: white;
+}
+
+.welcome-message {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    margin-right: 10px;
+    margin-top: 20px;
+    white-space: nowrap;
+}
+
+.logout-button {
+    background-color: #ff4d4d;
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #e60000;
+}
+
+.profile-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.profile-circle {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid black;
+}
+
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 65px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    width: 160px;
+    text-align: center;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.profile-dropdown p,
+.profile-dropdown button {
+    padding: 12px;
+    margin: 0;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    border: none;
+    background: white;
+    font-family: 'Times New Roman', serif;
+    font-size: 16px;
+}
+
+.profile-dropdown p:hover,
+.profile-dropdown button:hover {
+    background-color: #f2f2f2;
+}
+
+.dropdown-btn {
+    display: block;
+}
+
+/* CHATBOT BUTTON */
+#chatbot-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+#chatbot-button img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid black;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* CHATBOX */
+#chatbox {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: 320px;
+    background: white;
+    border-radius: 12px;
+    display: none;
+    flex-direction: column;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    overflow: hidden;
+    z-index: 9999;
+}
+
+#chat-header {
+    background: #2c3e50;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#chat-messages {
+    height: 260px;
+    overflow-y: auto;
+    padding: 12px;
+    font-size: 14px;
+    background: #f9f9f9;
+}
+
+#chat-messages div {
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+#chat-input-area {
+    display: flex;
+    border-top: 1px solid #ccc;
+}
+
+#chat-input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+#send-btn {
+    padding: 10px 14px;
+    border: none;
+    background: #27ae60;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#send-btn:hover {
+    background: #1f8a4c;
+}
+
+
+
+#chatbot-wrapper {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 9999;
+}
+
+/* FLOATING TEXT */
+#chatbot-label {
+    background-color: white;
+    color: #2c3e50;
+    padding: 10px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    white-space: nowrap;
+    border: 1px solid #ccc;
+}
+
+
+#chatbot-button {
+    position: static;
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+}
